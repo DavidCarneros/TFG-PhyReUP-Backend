@@ -1,0 +1,45 @@
+version: '3.7'
+
+volumes: 
+  postgres_data:
+      driver: local
+  
+networks:
+  external:
+    name: tfg-network
+  
+services:
+  tfg_backend_container:
+    image: tfg_backend
+    command: bash -c "cd /app/backend && bash install.sh"
+    ports: 
+      - 3000:3000
+    volumes: 
+      - ../davidcarneros-tfg-backend:/app/backend
+    tty: true
+    stdin_open: true
+    container_name: tfg_backend_container
+    depends_on: 
+      - tfg_backend_db
+    networks: 
+      - external
+    
+  tfg_backend_db:
+    image: postgres
+    environment: 
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: tfg_backend_db
+    container_name: tfg_backend_db
+    networks: 
+      - external
+  
+  tfg_adminer:
+    image: adminer
+    ports: 
+      - 8085:8080
+    container_name: tfg_adminer
+    networks: 
+      - external
+
+    
