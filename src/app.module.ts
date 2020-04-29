@@ -4,6 +4,8 @@ import { ExerciseModule } from './exercise/exercise.module';
 import { ExerciseResultModule } from './exercise-result/exercise-result.module';
 import { PatientModule } from './patient/patient.module';
 import { RoutineModule } from './routine/routine.module';
+import { RoutineResultController } from './routine-result/routine-result.controller';
+import { RoutineResultService } from './routine-result/routine-result.service';
 
 @Module({
   imports: [
@@ -13,7 +15,7 @@ import { RoutineModule } from './routine/routine.module';
     PatientModule,
     RoutineModule
   ],
-  controllers: [],
-  providers: [],
+  controllers: [RoutineResultController],
+  providers: [RoutineResultService],
 })
 export class AppModule {}
