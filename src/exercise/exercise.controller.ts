@@ -1,4 +1,25 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
+import { ExerciseService } from './exercise.service';
+import { Exercise } from './exercise.entity';
 
 @Controller('exercise')
-export class ExerciseController {}
+export class ExerciseController {
+
+    constructor(
+        private readonly exerciseService: ExerciseService
+    ){}
+
+    @Post()
+    async saveExercise(@Body() exercise:Exercise){
+        console.log(exercise);
+        return await this.exerciseService.register(exercise);
+    }
+
+    @Get()
+    async getAllExercises(){
+        return await this.getAllExercises();
+    }
+
+
+
+}

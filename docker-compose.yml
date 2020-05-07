@@ -15,7 +15,7 @@ services:
     ports: 
       - 3000:3000
     volumes: 
-      - ../davidcarneros-tfg-backend:/app/backend
+      - ../DavidCarneros-TFG-Backend:/app/backend
     tty: true
     stdin_open: true
     container_name: tfg_backend_container
