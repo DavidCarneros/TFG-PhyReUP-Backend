@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-import { IsEmail } from "class-validator";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { IsEmail, IsString } from "class-validator";
+import { Routine } from "src/routine/routine.entity";
 
 @Entity()
 export class Patient {
@@ -10,5 +11,11 @@ export class Patient {
     @Column()
     email: string;
 
+    @IsString()
+    @Column()
+    key: string;
+
+    @OneToMany(type => Routine, routine => routine.patient)
+    routines: Routine[];
 
 }

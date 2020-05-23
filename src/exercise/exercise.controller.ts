@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { ExerciseService } from './exercise.service';
 import { Exercise } from './exercise.entity';
 
@@ -17,7 +17,12 @@ export class ExerciseController {
 
     @Get()
     async getAllExercises(){
-        return await this.getAllExercises();
+        return await this.exerciseService.getAll();
+    }
+
+    @Get(":id")
+    async getOneExercise(@Param() params){
+        return await this.exerciseService.getExerciseById(params.id);
     }
 
 

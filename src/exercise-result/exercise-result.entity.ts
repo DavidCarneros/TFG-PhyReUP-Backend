@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-import { IsArray, IsOptional, IsInt, IsDecimal, IsDate } from "class-validator";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { IsArray, IsOptional, IsInt, IsDecimal, IsDate, IsString } from "class-validator";
+import { RoutineResult } from "src/routine-result/routine-result.entity";
 
 @Entity()
 export class ExerciseResult {
@@ -15,7 +16,7 @@ export class ExerciseResult {
     @IsArray()
     failures_back : number[];
 
-    @Column()
+    @Column("int")
     @IsInt()
     total_failures: number;
 
@@ -27,15 +28,19 @@ export class ExerciseResult {
     @IsOptional()
     time_back: number[];
 
-    @Column()
+    @Column("float")
     @IsDecimal()
     total_time: number;
 
     @Column()
-    @IsDate()
-    startAt: Date;
+    @IsString()
+    startAt: string;
 
     @Column()
-    @IsDate()
-    endAt: Date;
+    @IsString()
+    endAt: string;
+
+    @ManyToOne(type => RoutineResult, routineResult => routineResult.exerciseResult)
+    routineResult: RoutineResult;
+
 }

@@ -29,4 +29,12 @@ export class ExerciseService {
             .getMany();
     }
 
+    async getExerciseById(id:number){
+        return await this.exerciseRepository
+            .createQueryBuilder("exercise")
+            .select(["exercise"])
+            .where("id = :id", {id:id})
+            .getOne();
+    }
+
 }
