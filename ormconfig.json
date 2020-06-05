@@ -6,5 +6,5 @@
     "password": "root",
     "database": "tfg_backend_db",
     "entities": ["dist/**/*.entity.js"],
-    "synchronize": true
+    "synchronize": false
   }

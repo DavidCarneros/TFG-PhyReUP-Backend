@@ -7,6 +7,7 @@ import { RoutineModule } from './routine/routine.module';
 import { RoutineResultController } from './routine-result/routine-result.controller';
 import { RoutineResultService } from './routine-result/routine-result.service';
 import { RotuineResultModule } from './routine-result/routine-result.module';
+import { RotuinePatientModule } from './routine-patient/routine-patient.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { RotuineResultModule } from './routine-result/routine-result.module';
     RotuineResultModule,
     ExerciseResultModule,
     PatientModule,
-    RoutineModule
+    RoutineModule,
+    RotuinePatientModule
   ],
   controllers: [],
   providers: [],

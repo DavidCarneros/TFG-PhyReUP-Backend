@@ -37,7 +37,7 @@ services:
   tfg_adminer:
     image: adminer
     ports: 
-      - 8085:8080
+      - 8080:8080
     container_name: tfg_adminer
     networks: 
       - external
