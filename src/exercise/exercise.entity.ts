@@ -17,11 +17,6 @@ export class Exercise {
     @IsString()
     name: string;
 
-//    @IsOptional()
-//    @Column()
-//    @IsString()
-//    description: string;
-
     @IsUrl()
     @IsOptional()
     @Column()

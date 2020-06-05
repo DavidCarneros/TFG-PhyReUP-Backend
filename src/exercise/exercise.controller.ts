@@ -12,7 +12,14 @@ export class ExerciseController {
     @Post()
     async saveExercise(@Body() exercise:Exercise){
         console.log(exercise);
-        return await this.exerciseService.register(exercise);
+        const newExercise = new Exercise();
+        newExercise.back = exercise.back;
+        newExercise.hand = exercise.hand;
+        newExercise.keyPoint = exercise.keyPoint;
+        newExercise.name = exercise.name;
+        newExercise.points = exercise.points;
+        newExercise.videoUrl = "";
+        return await this.exerciseService.register(newExercise);
     }
 
     @Get()
