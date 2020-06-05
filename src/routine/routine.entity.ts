@@ -3,6 +3,7 @@ import { IsInt, IsBoolean, IsDecimal } from "class-validator";
 import { Exercise } from "src/exercise/exercise.entity";
 import { Patient } from "src/patient/patient.entity";
 import { RoutineResult } from "src/routine-result/routine-result.entity";
+import { RoutinePatient } from "src/routine-patient/routine-patient.entity";
 
 @Entity()
 export class Routine {
@@ -17,15 +18,11 @@ export class Routine {
     @IsBoolean()
     active: boolean;
 
-    @IsDecimal()
-    @Column()
-    accuracy: number;
-
     @ManyToOne(type => Exercise, exercise => exercise.routines)
     exercise: Exercise;
 
-    @ManyToOne(type => Patient, patient => patient.routines)
-    patient: Patient;
+    @OneToMany(type => RoutinePatient, routinePatient => routinePatient.routine)
+    routinePatient: RoutinePatient[];
 
     @OneToMany(type => RoutineResult, routineResult => routineResult.routine)
     routineResults: RoutineResult[];

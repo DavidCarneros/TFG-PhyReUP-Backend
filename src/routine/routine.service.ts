@@ -33,13 +33,9 @@ export class RoutineService {
     async getRoutinesByPatientKey(key:string){
         return await this.routineRespository
             .createQueryBuilder("routine")
-            .select(["routine","exercise"])
-        //    .select(["routine"])
+            .select(["routine"])
             .orderBy("routine.id","ASC")
-            .innerJoin("routine.patient","patient")
-            .innerJoin("routine.exercise","exercise")
-            .where('patient.key = :key',{key:key})
-            .andWhere('routine.active = true')
+            .innerJoin("routine_patient.routine","routine")
             .getMany();
     }
 
