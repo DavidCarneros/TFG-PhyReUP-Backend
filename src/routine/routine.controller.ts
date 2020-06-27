@@ -16,7 +16,7 @@ export class RoutineController {
         return await this.routineService.getRoutinesByPatientKey(patientKey);
     }
 
-    @Get(":id")
+    @Get("id/:id")
     async getRoutineById(@Param() params){
         const routineId = params.id;
         return await this.routineService.getRoutineById(routineId);
@@ -27,8 +27,15 @@ export class RoutineController {
         return await this.routineService.getAll();
     }
 
+    @Get('exercises')
+    async getAllRoutinesAndExercises(){
+        return await this.routineService.getAllWithExercises();
+    }
+
     @Post()
     async saveRoutine(@Body() routine:Routine){
+        console.log(routine)
+        console.log("SAVE REQUEST")
         return await this.routineService.register(routine);
     }
 

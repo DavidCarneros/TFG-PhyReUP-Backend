@@ -22,6 +22,14 @@ export class RoutineService {
             .getMany();
     }
 
+    async getAllWithExercises(){
+        return await this.routineRespository
+            .createQueryBuilder("routine")
+            .select(["routine","exercise"])
+            .innerJoin("routine.exercise","exercise")
+            .getMany();
+    }
+
     async getRoutineById(id:number){
         return await this.routineRespository
             .createQueryBuilder("routine")

@@ -15,6 +15,10 @@ export class Routine {
     repetitions: number;
 
     @Column()
+    @IsInt()
+    duration: number;
+
+    @Column()
     @IsBoolean()
     active: boolean;
 
