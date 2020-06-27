@@ -8,6 +8,7 @@ import { RoutineResultController } from './routine-result/routine-result.control
 import { RoutineResultService } from './routine-result/routine-result.service';
 import { RotuineResultModule } from './routine-result/routine-result.module';
 import { RotuinePatientModule } from './routine-patient/routine-patient.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { RotuinePatientModule } from './routine-patient/routine-patient.module';
     RoutineModule,
     RotuinePatientModule
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}

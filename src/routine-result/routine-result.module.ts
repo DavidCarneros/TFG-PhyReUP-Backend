@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { Module, forwardRef } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { RoutineResult } from "./routine-result.entity";
 import { RoutineResultService } from "./routine-result.service";
@@ -11,7 +11,7 @@ import { PatientModule } from "src/patient/patient.module";
     imports : [
         TypeOrmModule.forFeature([RoutineResult,ExerciseResult]),
         ExerciseResultModule,
-        PatientModule
+        forwardRef(() => PatientModule)
     ],
     providers: [RoutineResultService],
     exports: [RoutineResultService],

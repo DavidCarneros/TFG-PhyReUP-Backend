@@ -58,18 +58,22 @@ export class RoutineResultService {
             .getMany();
     }
 
+    async getRoutineResultAndExerciseResult(patientId:number, routineId:number){
+        return await this.routineResultRepository
+        .createQueryBuilder("routine-result")
+       // .select(["routine-result"])
+        .leftJoinAndSelect("routine-result.exerciseResult","exerciseResult")
+        .where("routine-result.patient = :patientId",{patientId:patientId})
+        .andWhere("routine-result.routine = :routineId",{routineId:routineId})
+        .orderBy("routine-result.id","DESC")
+        .getMany();
+    }
+
     async evaluateRoutines(patientId:number, routineId:number){
 
-        const routineResultAndExercisesResults = await this.routineResultRepository
-            .createQueryBuilder("routine-result")
-           // .select(["routine-result"])
-            .leftJoinAndSelect("routine-result.exerciseResult","exerciseResult")
-            .where("routine-result.patient = :patientId",{patientId:patientId})
-            .andWhere("routine-result.routine = :routineId",{routineId:routineId})
-            .orderBy("routine-result.id","DESC")
-            .getMany();
+        const routineResultAndExercisesResults = await this.getRoutineResultAndExerciseResult(patientId,routineId);
 
-        return this.evaluate(routineResultAndExercisesResults);;
+        return this.evaluate(routineResultAndExercisesResults);
     }
 
     private async evaluate(routineResult:RoutineResult[]){
