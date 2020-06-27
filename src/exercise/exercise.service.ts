@@ -26,6 +26,7 @@ export class ExerciseService {
         return await this.exerciseRepository
             .createQueryBuilder("exercise")
             .select(["exercise"])
+            .orderBy('id')
             .getMany();
     }
 
