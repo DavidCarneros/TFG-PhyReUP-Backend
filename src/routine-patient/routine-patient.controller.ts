@@ -2,17 +2,29 @@ import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { RoutinePatientService } from './rotuine-patient.service';
 import { RoutinePatient } from './routine-patient.entity';
 import { Routine } from 'src/routine/routine.entity';
+import { RoutinePatientBody } from './routine-patient.types';
+import { PatientService } from 'src/patient/patient.service';
 
 @Controller('routine-patient')
 export class RoutinePatientController {
 
     constructor(
-        private readonly routinePatientService: RoutinePatientService
+        private readonly routinePatientService: RoutinePatientService,
+        private readonly patientService: PatientService
     ){}
 
     @Post()
-    async saveRoutineResult(@Body() routineRatient: RoutinePatient){
-        
+    async saveRoutineResult(@Body() routinePatientBody: RoutinePatientBody){
+        let key = routinePatientBody.patient.slice(0,-1);
+        console.log(routinePatientBody);
+        console.log(key.toString());
+        let patient = await this.patientService.getPatientByKey(key.toString());
+        console.log(patient);
+        const routinePatient = new RoutinePatient()
+        routinePatient.active = routinePatientBody.active;
+        routinePatient.routine = routinePatientBody.routine;
+        routinePatient.patient = patient;
+        return await this.routinePatientService.register(routinePatient);
     }
 
     @Get("patient/:patient")

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RoutinePatient } from './routine-patient.entity';
+import { RotuinePatientModule } from './routine-patient.module';
 
 @Injectable()
 export class RoutinePatientService {
@@ -11,6 +12,10 @@ export class RoutinePatientService {
         private readonly routinePatientRepository: Repository<RoutinePatient>,
     ){}
 
+
+    async register(rotuinePatient: RoutinePatient){
+        return await this.routinePatientRepository.save(rotuinePatient);
+    }
 
     async getRoutinesByPatientKey(key:string){
         return await this.routinePatientRepository
@@ -29,5 +34,6 @@ export class RoutinePatientService {
             .andWhere('routine_patient.active = true')
             .getMany();
     }
+
 
 }
