@@ -29,7 +29,10 @@ export class RoutinePatientController {
 
     @Get("patient/:patient")
     async getRoutineByPatient(@Param() params){
-        const patientKey = params.patient;
+        console.log(`patient: ${params.patient}`);
+        let prueba = params.patient.slice(0,-1);
+        console.log(prueba.length);
+        const patientKey = prueba;
         const result = await this.routinePatientService.getRoutinesByPatientKey(patientKey);
         console.log(result);
 
