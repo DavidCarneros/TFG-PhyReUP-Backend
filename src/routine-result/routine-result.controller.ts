@@ -14,11 +14,16 @@ export class RoutineResultController {
     @Post(":patientId")
     async saveRoutineResult(@Param() param, @Body() routineResult: RoutineResult){
  
-        const patient = await this.patientService.getPatientByKey(param.patientId)
+        console.log(routineResult);
+        const patientId:string = param.patientId.slice(0,-1);
+        console.log(patientId)
+        const patient = await this.patientService.getPatientByKey(patientId)
+        console.log(patient);
         const saveResult = new RoutineResult();
         saveResult.complete = routineResult.complete;
         saveResult.endDate = routineResult.endDate;
         saveResult.exerciseResult = routineResult.exerciseResult;
+        saveResult.inTime = routineResult.inTime;
         saveResult.patient = patient;
         saveResult.problems = routineResult.problems;
         saveResult.routine = routineResult.routine;

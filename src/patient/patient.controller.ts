@@ -15,7 +15,9 @@ export class PatientController {
 
     @Get('evaluate/:key')
     async evaluatePatient(@Param() param){
-        return await this.patientService.getAllPatientRoutines(param.key);
+        const patientKey = param.key.slice(0,-1);
+        console.log(patientKey);
+        return await this.patientService.evaluateAllRoutinesByKey(patientKey);
     }
 
 }

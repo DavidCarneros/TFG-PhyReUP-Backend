@@ -25,6 +25,10 @@ export class RoutineResult {
     @IsBoolean()
     problems: boolean;
 
+    @Column()
+    @IsBoolean()
+    inTime: boolean;
+
     @ManyToOne(type => Routine, routine => routine.routineResults)
     routine: Routine;
 
